@@ -1,10 +1,20 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_KEY = import.meta.env.VITE_API_KEY || '';
+
+function getHeaders(extra: Record<string, string> = {}) {
+    const headers: Record<string, string> = { ...extra };
+    if (API_KEY) {
+        headers['Authorization'] = `Bearer ${API_KEY}`;
+    }
+    return headers;
+}
 
 export const servicosService = {
     async getAll() {
         const response = await fetch(`${API_URL}/servicos`, {
-            // Mode cors is default, but ensuring since different ports
-            mode: 'cors'
+            headers: getHeaders(),
+            mode: 'cors',
+            signal: AbortSignal.timeout(8000)
         });
         if (!response.ok) {
             throw new Error(`Erro API: ${response.statusText}`);
@@ -14,7 +24,9 @@ export const servicosService = {
 
     async getById(id: string) {
         const response = await fetch(`${API_URL}/servicos/${id}`, {
-            mode: 'cors'
+            headers: getHeaders(),
+            mode: 'cors',
+            signal: AbortSignal.timeout(8000)
         });
         if (!response.ok) {
             throw new Error(`Erro API: ${response.statusText}`);
@@ -25,8 +37,10 @@ export const servicosService = {
     async create(formData: FormData) {
         const response = await fetch(`${API_URL}/servicos`, {
             method: 'POST',
+            headers: getHeaders(),
             body: formData,
-            mode: 'cors'
+            mode: 'cors',
+            signal: AbortSignal.timeout(15000)
         });
         if (!response.ok) {
             throw new Error(`Erro API: ${response.statusText}`);
@@ -37,11 +51,10 @@ export const servicosService = {
     async update(id: string, servico: any) {
         const response = await fetch(`${API_URL}/servicos/${id}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify(servico),
-            mode: 'cors'
+            mode: 'cors',
+            signal: AbortSignal.timeout(10000)
         });
         if (!response.ok) {
             throw new Error(`Erro API: ${response.statusText}`);
@@ -52,7 +65,9 @@ export const servicosService = {
     async delete(id: string) {
         const response = await fetch(`${API_URL}/servicos/${id}`, {
             method: 'DELETE',
-            mode: 'cors'
+            headers: getHeaders(),
+            mode: 'cors',
+            signal: AbortSignal.timeout(10000)
         });
         if (!response.ok) {
             throw new Error(`Erro API: ${response.statusText}`);

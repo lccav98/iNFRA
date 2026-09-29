@@ -15,6 +15,7 @@ import Support from './pages/Support';
 
 const AppContent: React.FC = () => {
   const [darkMode, setDarkMode] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -24,6 +25,11 @@ const AppContent: React.FC = () => {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  // Fecha o menu móvel ao navegar entre rotas
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -50,12 +56,13 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      <Sidebar />
-      <main className="ml-64 flex-1 flex flex-col min-h-screen overflow-x-hidden">
+      <Sidebar mobileOpen={mobileMenuOpen} onCloseMobile={() => setMobileMenuOpen(false)} />
+      <main className="w-full md:ml-64 flex-1 flex flex-col min-h-screen overflow-x-hidden">
         <Header
           darkMode={darkMode}
           setDarkMode={setDarkMode}
           title={getPageTitle()}
+          onToggleSidebar={() => setMobileMenuOpen(prev => !prev)}
         />
 
         <div className="flex-1">
