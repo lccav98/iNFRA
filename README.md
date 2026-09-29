@@ -1,20 +1,63 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Sistema iNFRA - Gestão de Infraestrutura e Logística
 
-# Run and deploy your AI Studio app
+> Plataforma integrada para monitoramento, controle logístico e gestão de infraestrutura operacional.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/drive/1Qq8yPwFlMnInmkT028PLVU5M8PDRkq34
+## 📌 Visão Geral
 
-## Run Locally
+O **iNFRA** é uma solução web projetada para centralizar o acompanhamento de demandas logísticas, inventário de recursos, alocação de infraestrutura e relatórios gerenciais em tempo real.
 
-**Prerequisites:**  Node.js
+### Principais Módulos
+- **Painel de Controle (Dashboard):** Visão executiva de disponibilidade de recursos e alertas operacionais.
+- **Gestão de Infraestrutura:** Acompanhamento de instalações, manutenção e capacidades de acolhimento.
+- **Controle Logístico:** Rastreamento de remessas, materiais, suprimentos e ordens de serviço.
+- **Integração Backend:** Conexão com API REST dedicada (`iNFRA-backend`) e persistência segura em banco de dados relacional.
 
+---
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🛠️ Tecnologias Utilizadas
+
+- **Frontend:** [React](https://react.dev/) + [Vite](https://vitejs.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Estilização:** [Tailwind CSS](https://tailwindcss.com/)
+- **Visualização de Dados:** Lucide Icons & Victory Charts
+- **Comunicação:** Axios / Fetch API
+
+---
+
+## 🚀 Como Executar o Projeto
+
+### Pré-requisitos
+- [Node.js](https://nodejs.org/) (versão 18+ recomendada)
+- Gerenciador de pacotes `npm` ou `yarn`
+
+### 1. Clonar o repositório
+```bash
+git clone https://github.com/lccav98/iNFRA.git
+cd iNFRA
+```
+
+### 2. Instalar dependências
+```bash
+npm install
+```
+
+### 3. Configurar variáveis de ambiente
+Copie o arquivo de exemplo e preencha as variáveis:
+```bash
+cp .env.example .env
+```
+
+### 4. Iniciar o servidor de desenvolvimento
+```bash
+npm run dev
+```
+O frontend estará acessível em `http://localhost:5173`.
+
+---
+
+## 🔐 Segurança e Boas Práticas
+
+- Arquivos `.env` e chaves privadas nunca são versionados no Git.
+- Todos os pacotes devem ser instalados localmente (`npm install`), sem commitar `node_modules`.
+- Comunicação segura com o backend via HTTPS/TLS em ambiente de produção.
